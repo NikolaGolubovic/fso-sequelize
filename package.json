@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/NikolaGolubovic/fso-sequelize/issues"
   },
-  "homepage": "https://github.com/NikolaGolubovic/fso-sequelize#readme"
+  "homepage": "https://github.com/NikolaGolubovic/fso-sequelize#readme",
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1"
+  }
 }
