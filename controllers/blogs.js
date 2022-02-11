@@ -2,16 +2,48 @@ const router = require("express").Router();
 const { Blog } = require("../models");
 const { User } = require("../models");
 const { tokenExtractor } = require("../util/middleware");
+const { Op } = require("sequelize");
+const { sequelize } = require("../util/db");
 
 router.get("/", async (req, res, next) => {
   try {
+    console.log("hello");
+    const queries = {};
+    const where = {};
+    if (req.query.search) {
+      queries.title = {
+        [Op.iLike]: `%${req.query.search}%` ? `%${req.query.search}%` : "",
+      };
+      queries.author = {
+        [Op.iLike]: `%${req.query.search}%` ? `%${req.query.search}%` : "",
+      };
+      where[Op.or] = [{ title: queries.title }, { author: queries.author }];
+    }
     const blogs = await Blog.findAll({
+      where,
+      order: [["likes", "DESC"]],
       include: {
         model: User,
         attributes: ["username"],
       },
     });
     res.json(blogs);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/authors", async (req, res, next) => {
+  try {
+    const blogs = await Blog.findAll({
+      group: ["author"],
+      attributes: [
+        "author",
+        [sequelize.fn("count", sequelize.col("author")), "articles"],
+        [sequelize.fn("sum", sequelize.col("likes")), "likes"],
+      ],
+    });
+    res.status(200).json(blogs);
   } catch (error) {
     next(error);
   }
@@ -51,11 +83,11 @@ router.put("/:id", tokenExtractor, async (req, res, next) => {
     if (blog === null) {
       throw new Error("Blog is not found");
     }
-    blog.likes = 3;
+    await blog.update({ likes: req.body.likes });
     await blog.save();
-    res.json({ msg: "ok", blog });
+    return res.json({ msg: "ok", blog });
   } catch (error) {
-    next("put api/blogs", error);
+    next(error);
   }
 });
 
