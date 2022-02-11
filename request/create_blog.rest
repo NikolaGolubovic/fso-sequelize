@@ -1,0 +1,9 @@
+POST http://localhost:3000/api/blogs
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvZSIsImlkIjoyLCJpYXQiOjE2NDQ1NzM3NzV9.AmbU27Wl0keGeiHogKl-DPNXbVHUkenlTnOsn8YxjtU
+Content-Type: application/json
+
+{
+    "author": "joe",
+    "url": "joe.com/blog/variables-in-js",
+    "title": "Javascript - let vs const vs var"
+}
