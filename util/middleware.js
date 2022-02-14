@@ -7,8 +7,19 @@ const errorHandler = (errors, _req, res, next) => {
     res.send(error);
     next(errors);
   }
-  if (errors.name === "ValidationError") {
-    res.status(404).json({ msg: "Something went wrong with Credentials" });
+
+  let errMsg = "";
+  errors.errors.forEach((err) => {
+    if (err.validatorKey === "isBefore" || err.validatorKey === "isAfter") {
+      errMsg = "Year must be between 1991 and 2022";
+    }
+  });
+  if (errMsg) {
+    return res.status(404).json({ msg: errMsg });
+  } else if (errors.name === "ValidationError") {
+    return res
+      .status(404)
+      .json({ msg: "Something went wrong with Credentials" });
   } else if (errors.name === "JsonWebTokenError") {
     return res.status(401).json({
       error: "invalid token",

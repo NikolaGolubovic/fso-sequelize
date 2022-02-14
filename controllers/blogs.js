@@ -7,7 +7,6 @@ const { sequelize } = require("../util/db");
 
 router.get("/", async (req, res, next) => {
   try {
-    console.log("hello");
     const queries = {};
     const where = {};
     if (req.query.search) {
@@ -51,12 +50,19 @@ router.get("/authors", async (req, res, next) => {
 
 router.post("/", tokenExtractor, async (req, res, next) => {
   try {
-    const { author, url, title } = req.body;
+    const { author, url, title, year: yearParams } = req.body;
+    const year = new Date(`${yearParams}-01-01`);
     const user = await User.findByPk(req.decodedToken.id);
-    const blog = await Blog.create({ author, url, title, userId: user.id });
+    const blog = await Blog.create({
+      author,
+      url,
+      title,
+      userId: user.id,
+      year,
+    });
     return res.status(200).json(blog);
   } catch (error) {
-    return res.status(400).json({ error });
+    next(error);
   }
 });
 
