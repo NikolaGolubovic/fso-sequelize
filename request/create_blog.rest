@@ -7,3 +7,10 @@ Content-Type: application/json
     "url": "joe.com/blog/variables-in-js",
     "title": "Javascript - let vs const vs var"
 }
+
+// {
+//     "username": "nikola",
+//     "name": "nikola g",
+//     "password": "secret",
+//     "disabled": false
+// }

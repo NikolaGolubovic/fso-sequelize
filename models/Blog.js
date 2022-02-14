@@ -24,11 +24,19 @@ Blog.init(
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
+    year: {
+      type: DataTypes.DATE,
+      validate: {
+        isAfter: "1991-01-01",
+        isBefore: "2022-12-12",
+      },
+    },
   },
   {
     sequelize,
     underscored: true,
     modelName: "blog",
+    timestamps: true,
   }
 );
 
