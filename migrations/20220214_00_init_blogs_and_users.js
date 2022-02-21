@@ -37,6 +37,10 @@ module.exports = {
           isBefore: "2022-12-12",
         },
       },
+      reading_state: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     });
     await queryInterface.createTable("users", {
       id: {
