@@ -1,16 +1,10 @@
 POST http://localhost:3000/api/blogs
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvZSIsImlkIjoyLCJpYXQiOjE2NDQ1NzM3NzV9.AmbU27Wl0keGeiHogKl-DPNXbVHUkenlTnOsn8YxjtU
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5pa29sYSIsImlkIjoyLCJpYXQiOjE2NDU0MzY0NjJ9.c915MHR8J9zz89wChuJSfHEGVi3pN-xus12WNot_i_M
 Content-Type: application/json
 
 {
-    "author": "joe",
-    "url": "joe.com/blog/variables-in-js",
-    "title": "Javascript - let vs const vs var"
+    "author": "nikola",
+    "url": "nikola.com/blog/javascript_objects",
+    "title": "Javascript objects"
 }
 
-// {
-//     "username": "nikola",
-//     "name": "nikola g",
-//     "password": "secret",
-//     "disabled": false
-// }

@@ -31,6 +31,10 @@ Blog.init(
         isBefore: "2022-12-12",
       },
     },
+    readingState: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   },
   {
     sequelize,
@@ -39,7 +43,5 @@ Blog.init(
     timestamps: true,
   }
 );
-
-Blog.sync();
 
 module.exports = Blog;

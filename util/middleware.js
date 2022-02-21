@@ -9,7 +9,7 @@ const errorHandler = (errors, _req, res, next) => {
   }
 
   let errMsg = "";
-  errors.errors.forEach((err) => {
+  errors?.errors?.forEach((err) => {
     if (err.validatorKey === "isBefore" || err.validatorKey === "isAfter") {
       errMsg = "Year must be between 1991 and 2022";
     }
